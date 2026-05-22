@@ -10,7 +10,6 @@ env/
 data/MachineLearningRating_v3.txt
 
 # Jupyter Notebook
-.ipynb_checkpoints/
 *.ipynb_checkpoints/
 
 # VS Code
