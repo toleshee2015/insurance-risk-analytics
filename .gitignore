@@ -6,13 +6,12 @@ __pycache__/
 venv/
 env/
 
-#
-data/
-venv/
-*.ipynb_checkpoints/
+# DATA (ONLY raw dataset, NOT DVC files)
+data/MachineLearningRating_v3.txt
 
 # Jupyter Notebook
 .ipynb_checkpoints/
+*.ipynb_checkpoints/
 
 # VS Code
 .vscode/
