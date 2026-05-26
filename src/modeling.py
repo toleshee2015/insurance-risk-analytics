@@ -12,6 +12,7 @@ from xgboost import XGBRegressor
 class ModelTrainer:
 
     def __init__(self, test_size=0.2, random_state=42, run_shap=False):
+
         self.test_size = test_size
         self.random_state = random_state
         self.run_shap = run_shap
@@ -46,7 +47,7 @@ class ModelTrainer:
         return df
 
     # =====================================================
-    # CLEANING (FIXED)
+    # CLEANING (FIXED + WARNING FREE)
     # =====================================================
     def clean_features(self, df):
 
@@ -54,36 +55,41 @@ class ModelTrainer:
 
         df = df.dropna(axis=1, how="all")
 
-        # ---------------------------
+        # -------------------------
         # DATE HANDLING (FIXED)
-        # ---------------------------
+        # -------------------------
         date_cols = ["TransactionMonth", "VehicleIntroDate"]
 
         for col in date_cols:
             if col in df.columns:
-                df[col] = pd.to_datetime(df[col], errors="coerce")
 
-                # extract useful features instead of raw timestamp
+                df[col] = pd.to_datetime(
+                    df[col],
+                    format="%Y-%m-%d %H:%M:%S",
+                    errors="coerce"
+                )
+
                 df[col + "_year"] = df[col].dt.year
                 df[col + "_month"] = df[col].dt.month
 
                 df = df.drop(columns=[col])
 
-        # ---------------------------
+        # -------------------------
         # BOOLEAN → INT
-        # ---------------------------
+        # -------------------------
         bool_cols = df.select_dtypes(include=["bool"]).columns
         df[bool_cols] = df[bool_cols].astype(int)
 
-        # ---------------------------
-        # CATEGORICAL → ONE-HOT (IMPORTANT FIX)
-        # ---------------------------
-        cat_cols = df.select_dtypes(include=["object"]).columns
+        # -------------------------
+        # CATEGORICAL → ONE HOT (FIXED FOR PANDAS 2/3)
+        # -------------------------
+        cat_cols = df.select_dtypes(include=["object", "string"]).columns
+
         df = pd.get_dummies(df, columns=cat_cols, drop_first=True)
 
-        # ---------------------------
+        # -------------------------
         # NUMERIC CLEANUP
-        # ---------------------------
+        # -------------------------
         df = df.replace([np.inf, -np.inf], np.nan)
         df = df.fillna(0)
 
@@ -123,9 +129,9 @@ class ModelTrainer:
     # =====================================================
     # MAIN PIPELINE
     # =====================================================
-    def run_all(self, df, target):
+    def run_all(self, df, target="TotalPremium"):
 
-        self.results = {}
+        self.results = []
 
         # STEP 1: feature engineering
         df = self.feature_engineering(df)
@@ -136,9 +142,9 @@ class ModelTrainer:
         # STEP 3: split
         X_train, X_test, y_train, y_test = self.split_data(df, target)
 
-        # ---------------------------
+        # -------------------------
         # MODELS
-        # ---------------------------
+        # -------------------------
         models = {
             "LinearRegression": LinearRegression(),
 
@@ -159,7 +165,7 @@ class ModelTrainer:
             )
         }
 
-        # TRAIN LOOP
+        # TRAIN MODELS
         for name, model in models.items():
 
             model.fit(X_train, y_train)
@@ -170,6 +176,7 @@ class ModelTrainer:
 
         # BEST MODEL
         best = max(self.results, key=lambda x: x["r2_score"])
+
         self.best_model_name = best["model"]
         self.best_model = self.models[self.best_model_name]
 
