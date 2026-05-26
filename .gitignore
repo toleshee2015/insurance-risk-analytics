@@ -1,25 +1,29 @@
-# Python cache
-__pycache__/
-*.py[cod]
-
-# Virtual environments
+# environments
 venv/
-env/
+.env/
 
-# DATA (ONLY raw dataset, NOT DVC files)
-data/MachineLearningRating_v3.txt
+# python cache
+__pycache__/
+*.pyc
 
+<<<<<<< HEAD
 # Jupyter Notebook
 *.ipynb_checkpoints/
 Untitled.ipynb
 Untitled*.ipynb
+=======
+# notebooks
+.ipynb_checkpoints/
+>>>>>>> 9d8063c (update)
 
-# VS Code
-.vscode/
+# testing
+.pytest_cache/
 
-# PyCharm
-.idea/
+# dvc internals
+.dvc/cache/
+.dvc/tmp/
 
+<<<<<<< HEAD
 # Environment variables
 .env
 
@@ -31,3 +35,8 @@ dist/
 # OS files
 .DS_Store
 Thumbs.db
+=======
+# data (only if tracked by dvc)
+data/*.csv
+data/*.txt
+>>>>>>> 9d8063c (update)
