@@ -1,33 +1,55 @@
+# =========================
 # Python cache
+# =========================
 __pycache__/
 *.py[cod]
 
+# =========================
 # Virtual environments
+# =========================
 venv/
 env/
 
-# DATA (ONLY raw dataset, NOT DVC files)
+# =========================
+# Data (raw dataset only)
+# =========================
 data/MachineLearningRating_v3.txt
 
-# Jupyter Notebook
+# =========================
+# Jupyter Notebooks
+# =========================
 *.ipynb_checkpoints/
+.ipynb_checkpoints/
+
+# Ignore common temporary notebooks
 Untitled.ipynb
 Untitled*.ipynb
+*-checkpoint.ipynb
 
+# =========================
 # VS Code
+# =========================
 .vscode/
 
+# =========================
 # PyCharm
+# =========================
 .idea/
 
+# =========================
 # Environment variables
+# =========================
 .env
 
-# Build files
+# =========================
+# Build artifacts
+# =========================
 build/
 dist/
 *.egg-info/
 
+# =========================
 # OS files
+# =========================
 .DS_Store
 Thumbs.db
