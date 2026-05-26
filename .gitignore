@@ -8,7 +8,9 @@ __pycache__/
 # Virtual environments
 # =========================
 venv/
-env/
+__pycache__/
+.ipynb_checkpoints/
+*.pyc
 
 # =========================
 # Data (raw dataset only)
