@@ -1,4 +1,5 @@
 
+
 import pandas as pd
 import numpy as np
 from scipy import stats
@@ -46,6 +47,7 @@ def test_security_impact(df):
     t_stat, p_val = stats.ttest_ind(group_b, group_a, equal_var=False)
     decision = "Reject H₀" if p_val < 0.05 else "Fail to Reject H₀"
     return "Two-Sample Welch t-test", p_val, decision
+
 
 import numpy as np
 import pandas as pd
@@ -164,6 +166,9 @@ def add_claim_frequency(df):
 # SUMMARY TABLE GENERATOR
 # =========================================================
 def results_table(results):
+
+    return pd.DataFrame(results)
+
 
     return pd.DataFrame(results)
 
