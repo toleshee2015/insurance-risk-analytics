@@ -11,6 +11,8 @@ data/MachineLearningRating_v3.txt
 
 # Jupyter Notebook
 *.ipynb_checkpoints/
+Untitled.ipynb
+Untitled*.ipynb
 
 # VS Code
 .vscode/
