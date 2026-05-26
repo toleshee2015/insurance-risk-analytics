@@ -5,3 +5,4 @@ matplotlib
 seaborn
 dvc
 flake8
+pytest
