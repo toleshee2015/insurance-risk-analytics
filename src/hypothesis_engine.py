@@ -159,7 +159,8 @@ class HypothesisEngine:
         elif kpi_type == "numerical":
 
             if control_features is not None:
-                res = self.matched_ttest(df, group_col, value_col, control_features)
+                res = self.matched_ttest(
+                    df, group_col, value_col, control_features)
             else:
                 if baseline is None:
                     raise ValueError("baseline required")

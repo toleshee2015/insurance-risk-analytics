@@ -1,6 +1,6 @@
 from hypothesis_registry import HYPOTHESIS_REGISTRY
 from hypothesis_engine import HypothesisEngine
-import metrics
+
 
 
 class HypothesisRunner:
@@ -45,7 +45,8 @@ class HypothesisRunner:
             # --------------------------
             else:
                 if config["kpi"] == "margin":
-                    self.df["margin"] = self.df["premium"] - self.df["claim_amount"]
+                    self.df["margin"] = self.df["premium"] - \
+                        self.df["claim_amount"]
 
                     res = self.engine.welch_ttest(
                         self.df,

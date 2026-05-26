@@ -33,13 +33,16 @@ class ModelTrainer:
         current_year = pd.Timestamp.now().year
 
         if "RegistrationYear" in df.columns:
-            df["VehicleAge"] = (current_year - df["RegistrationYear"]).clip(lower=0)
+            df["VehicleAge"] = (
+                current_year - df["RegistrationYear"]).clip(lower=0)
 
         if "TotalPremium" in df.columns and "SumInsured" in df.columns:
-            df["PremiumToInsuredRatio"] = df["TotalPremium"] / (df["SumInsured"] + 1)
+            df["PremiumToInsuredRatio"] = df["TotalPremium"] / \
+                (df["SumInsured"] + 1)
 
         if "TotalClaims" in df.columns and "TotalPremium" in df.columns:
-            df["ClaimToPremiumRatio"] = df["TotalClaims"] / (df["TotalPremium"] + 1)
+            df["ClaimToPremiumRatio"] = df["TotalClaims"] / \
+                (df["TotalPremium"] + 1)
 
         if "NumberOfVehiclesInFleet" in df.columns:
             df["IsFleet"] = (df["NumberOfVehiclesInFleet"] > 1).astype(int)
@@ -101,7 +104,8 @@ class ModelTrainer:
     def split_data(self, df, target):
 
         if target not in df.columns:
-            raise ValueError(f"Target column '{target}' not found in dataframe")
+            raise ValueError(
+                f"Target column '{target}' not found in dataframe")
 
         X = df.drop(columns=[target])
         y = df[target]
