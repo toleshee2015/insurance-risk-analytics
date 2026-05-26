@@ -1,8 +1,10 @@
-numpy
 pandas
+numpy
 scipy
 matplotlib
 seaborn
+scikit-learn
+jupyter
+pytest
 dvc
 flake8
-pytest
