@@ -1,9 +1,7 @@
-pandas
 numpy
+pandas
+scipy
 matplotlib
 seaborn
-scikit-learn
-jupyter
-
-pytest
+dvc
 flake8
